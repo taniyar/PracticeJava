@@ -1,0 +1,47 @@
+public class Pallindrome {
+
+	public static void main(String args[]) {
+		int num[] = new int[100];
+
+		for (int i = 10; i < num.length; i++) {
+			num[i] = i;
+		}
+		int[] multiples = getMultiples(num);
+		pallindromes(multiples);
+
+	}
+
+	public static int[] getMultiples(int num[]) {
+		int multiples[] = new int[9000];
+		int k = 0;
+		for (int i = 10; i < num.length; i++) {
+			for (int j = 10; j < num.length; j++) {
+				multiples[j + k * 100] = num[j] * i;
+			}
+			k++;
+		}
+		return multiples;
+	}
+
+	public static int[] pallindromes(int multiples[]) {
+		int rev[] = new int[9000];
+		int store[] = new int[9000];
+		int palindromes[] = new int[9000];
+		
+		for (int i = 10; i < multiples.length; i++) {
+			int index = 0;
+			int originalNum = 0;
+			originalNum = multiples[i];
+			while (multiples[i] != 0) {
+				store[i] = multiples[i] % 10;
+				rev[i] = 10 * rev[i] + store[i];
+				multiples[i] = multiples[i] / 10;
+			}
+			if (originalNum == rev[i]) {
+				palindromes[index++] = originalNum;
+			}
+			System.out.println(palindromes[index]);
+		};
+		return multiples;
+	}
+}
